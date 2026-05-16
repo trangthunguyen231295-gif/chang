@@ -78,9 +78,26 @@ export const AdminDashboard = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
   const { content, updateContent, user, isAdmin, login } = useContent();
   const [localContent, setLocalContent] = useState(content);
   const [isSaving, setIsSaving] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [activeTab, setActiveTab] = useState('general');
 
   if (!isOpen) return null;
+
+  const handleLogin = async () => {
+    setIsLoggingIn(true);
+    try {
+      await login();
+    } catch (e: any) {
+      console.error(e);
+      if (e.code === 'auth/popup-blocked') {
+        alert('Trình duyệt đã chặn cửa sổ đăng nhập. Vui lòng cho phép hiện pop-up và thử lại.');
+      } else {
+        alert('Đã xảy ra lỗi khi đăng nhập: ' + (e.message || 'Lỗi không xác định'));
+      }
+    } finally {
+      setIsLoggingIn(false);
+    }
+  };
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -116,10 +133,11 @@ export const AdminDashboard = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
           <h2 className="text-2xl font-bold mb-2">Admin Login</h2>
           <p className="text-brand-brown/60 mb-8">Please sign in with Google to access the management panel.</p>
           <button 
-            onClick={login}
-            className="w-full bg-brand-pink text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-brand-pink/20 transition-all flex items-center justify-center gap-2"
+            onClick={handleLogin}
+            disabled={isLoggingIn}
+            className="w-full bg-brand-pink text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-brand-pink/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70"
           >
-            Sign in with Google
+            {isLoggingIn ? <Loader2 className="w-6 h-6 animate-spin" /> : 'Sign in with Google'}
           </button>
           <button onClick={onClose} className="mt-4 text-sm font-bold text-brand-brown/60 hover:text-brand-brown underline uppercase tracking-widest">
             Back to site
