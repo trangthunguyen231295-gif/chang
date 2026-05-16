@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    // Settings collection
+    match /settings/landing-page {
+      allow read: if true; // Publicly readable
+      allow write: if isAdmin();
+    }
+
+    // Admin lookup
+    match /admins/{adminId} {
+      allow read: if isSignedIn(); // Allow signed in users to check their admin status
+      allow write: if false; // System managed or manually set
+    }
+  }
+}

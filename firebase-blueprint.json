@@ -1,0 +1,181 @@
+{
+  "entities": {
+    "LandingPageContent": {
+      "title": "Landing Page Content",
+      "description": "All editable text and image content for the Co Chan landing page.",
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "object",
+          "properties": {
+            "logo": { "type": "string" },
+            "phone": { "type": "string" },
+            "navLinks": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "hero": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "listItems": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "primaryBtn": { "type": "string" },
+            "secondaryBtn": { "type": "string" },
+            "image": { "type": "string" },
+            "experienceYears": { "type": "string" }
+          }
+        },
+        "stats": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": { "type": "string" },
+              "label": { "type": "string" }
+            }
+          }
+        },
+        "painPoints": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": { "type": "string" },
+                  "icon": { "type": "string" }
+                }
+              }
+            },
+            "quote": { "type": "string" },
+            "cta": { "type": "string" }
+          }
+        },
+        "about": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "stats": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "number": { "type": "string" },
+                  "label": { "type": "string" },
+                  "sublabel": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "services": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "image": { "type": "string" },
+                  "icon": { "type": "string" },
+                  "details": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            },
+            "cta": { "type": "string" }
+          }
+        },
+        "whyChoose": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            },
+            "image": { "type": "string" },
+            "testimonial": {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "author": { "type": "string" }
+              }
+            }
+          }
+        },
+        "steps": {
+          "type": "object",
+          "properties": {
+            "badge": { "type": "string" },
+            "title": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "title": { "type": "string" },
+                  "desc": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "ctaSection": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "image": { "type": "string" },
+            "primaryBtn": { "type": "string" },
+            "secondaryBtn": { "type": "string" }
+          }
+        },
+        "footer": {
+          "type": "object",
+          "properties": {
+            "description": { "type": "string" },
+            "phone": { "type": "string" },
+            "email": { "type": "string" },
+            "address": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "settings/landing-page": {
+      "schema": "LandingPageContent",
+      "description": "Global settings for the landing page content."
+    },
+    "admins/{adminId}": {
+        "schema": "object",
+        "description": "List of authorized admin UIDs."
+    }
+  }
+}

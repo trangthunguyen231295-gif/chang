@@ -1,0 +1,8 @@
+{
+  "name": "Cô Chan - Chăm sóc mẹ & bé",
+  "description": "Dịch vụ chăm sóc mẹ và bé sau sinh toàn diện với gần 10 năm kinh nghiệm, đồng hành cùng mẹ trong hành trình hồi phục và nuôi con.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
