@@ -21,6 +21,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useContent } from './contexts/ContentContext';
 import { AdminDashboard } from './components/AdminDashboard';
 
@@ -70,6 +71,21 @@ const StatItem = ({ number, label, sublabel }: { number: string, label: string, 
 export default function App() {
   const { content, loading } = useContent();
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    if (location.pathname === '/admin') {
+      setIsAdminOpen(true);
+    }
+  }, [location.pathname]);
+
+  const closeAdmin = () => {
+    setIsAdminOpen(false);
+    if (location.pathname === '/admin') {
+      navigate('/');
+    }
+  };
 
   if (loading) {
     return (
@@ -84,7 +100,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <AdminDashboard isOpen={isAdminOpen} onClose={() => setIsAdminOpen(false)} />
+      <AdminDashboard isOpen={isAdminOpen} onClose={closeAdmin} />
 
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-pink/5 px-6 py-4">
