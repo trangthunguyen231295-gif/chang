@@ -91,6 +91,8 @@ export const AdminDashboard = ({ isOpen, onClose }: { isOpen: boolean, onClose: 
       console.error(e);
       if (e.code === 'auth/popup-blocked') {
         alert('Trình duyệt đã chặn cửa sổ đăng nhập. Vui lòng cho phép hiện pop-up và thử lại.');
+      } else if (e.code === 'auth/unauthorized-domain') {
+        alert('Lỗi: Tên miền này chưa được ủy quyền trong Firebase. \n\nVui lòng truy cập Firebase Console > Authentication > Settings > Authorized domains và thêm tên miền hiện tại vào danh sách.');
       } else {
         alert('Đã xảy ra lỗi khi đăng nhập: ' + (e.message || 'Lỗi không xác định'));
       }
